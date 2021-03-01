@@ -3,7 +3,7 @@
 yum list installed nfs-utils
 error=$?
 
-if [[ $error ne 0 ]]
+if [[ $error -ne 0 ]]
     then
         yum install nfs-utils
 fi
@@ -16,18 +16,25 @@ echo "/nfs_share/uploads               192.168.50.11(rw,sync,root_squash,no_subt
 firewall-cmd --state > /dev/null  2>&1
 error=$?
 
-if [[ $error ne 0 ]]
+if [[ $error -ne 0 ]]
     then
         systemctl enable --now firewalld
         firewall-cmd --permanent --zone=public --add-service=nfs
+        firewall-cmd --permanent --zone=public --add-service=nfs3
         firewall-cmd --permanent --zone=public --add-service=mountd
         firewall-cmd --permanent --zone=public --add-service=rpc-bind
+        firewall-cmd --remove-service=dhcpv6-client
         firewall-cmd --reload
     else 
         firewall-cmd --permanent --zone=public --add-service=nfs
+        firewall-cmd --permanent --zone=public --add-service=nfs3
         firewall-cmd --permanent --zone=public --add-service=mountd
         firewall-cmd --permanent --zone=public --add-service=rpc-bind
+        firewall-cmd --remove-service=dhcpv6-client
         firewall-cmd --reload   
 fi
 
 systemctl restart nfs-server rpcbind
+
+sleep 20
+

@@ -19,14 +19,14 @@ Vagrant.configure(2) do |config|
                 #nfss.vm.synced_folder "./sync_data_server", "/home/vagrant/mnt"
                 nfss.vm.network "private_network", ip: "192.168.50.10", virtualbox__intnet: "net1"
                 nfss.vm.hostname = "nfssrv"
-                #nfss.vm.provision "shell", path: "nfss_script.sh"
+                nfss.vm.provision "shell", path: "nfss_script.sh"
             end
 
             config.vm.define "nfs_client" do |nfsc|
                 #nfsc.vm.synced_folder "./sync_data_client", "/home/vagrant/mnt"
                 nfsc.vm.network "private_network", ip: "192.168.50.11", virtualbox__intnet: "net1"
                 nfsc.vm.hostname = "nfscln"
-                #nfsc.vm.provision "shell", path: "nfsc_script.sh"
+                nfsc.vm.provision "shell", path: "nfsc_script.sh"
             end
 
 end
