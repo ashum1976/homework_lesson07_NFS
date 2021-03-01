@@ -1,6 +1,6 @@
 #!/bin/bash
 
-yum list installed nfs-utils
+yum list installed nfs-utils > /dev/null
 error=$?
 
 if [[ $error -ne 0 ]]
@@ -9,9 +9,9 @@ if [[ $error -ne 0 ]]
 fi
 
 mkdir -p /nfs_share/uploads
-chown vagrant /nfs_share/uploads
-echo "/nfs_share               192.168.50.11(ro,sync,root_squash,no_subtree_check)" > /etc/exports
-echo "/nfs_share/uploads               192.168.50.11(rw,sync,root_squash,no_subtree_check)" >> /etc/exports
+chown nfsnobody /nfs_share/uploads
+echo "/nfs_share               192.168.50.11(rw,sync,root_squash,no_subtree_check)" > /etc/exports
+#echo "/nfs_share/uploads               192.168.50.11(rw,sync,root_squash,no_subtree_check)" >> /etc/exports
 
 firewall-cmd --state > /dev/null  2>&1
 error=$?

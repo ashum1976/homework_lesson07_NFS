@@ -197,7 +197,7 @@ Network File System (NFS) – протокол распределенной фа
         192.168.50.10:/nfs_share  /mnt/nfs    nfs     rw,noatime,noauto,x-systemd.automount,noexec,nosuid,udp,vers=3  0 0
         
 
-Для такого варианта запуска создаём юнит файл с именем соответствующим точке монтирования, где "/" заменяется на "-" Например:
+Для автоматического варианта запуска, создаём юнит файл с именем соответствующим точке монтирования, где "/" заменяется на "-" Например:
         
         [Unit]
         Description=mount NFS Share from Server
@@ -212,6 +212,8 @@ Network File System (NFS) – протокол распределенной фа
 
         [Install]
         WantedBy=default.target
+        
+        
         
        2.2.1 Опции монтирование каталога на клиентской машине
 

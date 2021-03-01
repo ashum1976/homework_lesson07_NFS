@@ -24,7 +24,7 @@ if [[ $error -ne 0 ]]
     
     then
         echo -e "\e[31mПроблемы с сетевым диском NFS !\e[0m"
-    
+        exit 123
     elif [[ $errorfstab -ne 0 ]]
     
            then
@@ -41,6 +41,7 @@ if [[ $error -ne 0 ]]
                 echo "test" >> /mnt/nfs/uploads/test
          
 fi
+
 
 
 
